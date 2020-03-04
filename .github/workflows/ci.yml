@@ -22,6 +22,7 @@ jobs:
         artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
+      shell: bash
     - name: Upload
       uses: actions/upload-artifact@master
       with:
