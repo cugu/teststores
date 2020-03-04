@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup go 1.13
@@ -16,7 +16,7 @@ jobs:
     - name: Set system path
       run: echo "##[add-path]$(go env GOPATH)/bin"
     - run: GO111MODULE=on go get -u github.com/forensicanalysis/artifactcollector
-    - run: sudo artifactcollector
+    - run: artifactcollector
     - run: mkdir testdata
     - run: mv *.forensicstore.zip testdata
     - name: Upload
