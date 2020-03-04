@@ -15,10 +15,13 @@ jobs:
       with: {go-version: '1.13'}
     - name: Set system path
       run: echo "##[add-path]$(go env GOPATH)/bin"
-    - run: GO111MODULE=on go get -u github.com/forensicanalysis/artifactcollector
-    - run: artifactcollector
-    - run: mkdir testdata
-    - run: mv *.forensicstore.zip testdata
+    - run: |
+        git clone https://github.com/forensicanalysis/artifactcollector
+        cd artifactcollector
+        go build .
+        artifactcollector.exe
+        mkdir testdata
+        mv *.forensicstore.zip testdata
     - name: Upload
       uses: actions/upload-artifact@master
       with:
