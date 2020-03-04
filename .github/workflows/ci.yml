@@ -7,18 +7,24 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup go 1.13
       uses: actions/setup-go@v1
       with: {go-version: '1.13'}
-    - run: GO111MODULE=on go get -u github.com/forensicanalysis/artifactcollector
-    - run: artifactcollector
-    - run: mkdir testdata
-    - run: mv *.forensicstore.zip testdata
+    - name: Set system path
+      run: echo "##[add-path]$(go env GOPATH)/bin"
+    - run: |
+        git clone https://github.com/forensicanalysis/artifactcollector
+        cd artifactcollector
+        go install .
+        artifactcollector.exe
+        mkdir testdata
+        mv *.forensicstore.zip testdata
+      shell: bash
     - name: Upload
       uses: actions/upload-artifact@master
       with:
         name: testdata
-        path: testdata
+        path: artifactcollector/testdata
