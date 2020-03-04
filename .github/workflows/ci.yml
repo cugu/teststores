@@ -18,9 +18,7 @@ jobs:
     - run: |
         git clone https://github.com/forensicanalysis/artifactcollector
         cd artifactcollector
-        go build .
         go install .
-        ls
         artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
@@ -29,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: testdata
-        path: testdata
+        path: artifactcollector/testdata
