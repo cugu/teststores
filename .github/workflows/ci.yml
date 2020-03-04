@@ -16,7 +16,7 @@ jobs:
     - name: Set system path
       run: echo "##[add-path]$(go env GOPATH)/bin"
     - run: GO111MODULE=on go get -u github.com/forensicanalysis/artifactcollector
-    - run: artifactcollector
+    - run: sudo artifactcollector
     - run: mkdir testdata
     - run: mv *.forensicstore.zip testdata
     - name: Upload
