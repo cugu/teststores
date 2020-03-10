@@ -19,7 +19,7 @@ jobs:
         git clone https://github.com/forensicanalysis/artifactcollector --branch=v0.13.1
         cd artifactcollector
         go generate
-        go install .
+        go build .
         artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
@@ -50,7 +50,7 @@ jobs:
         mv 1/artifacts/*.yaml artifactcollector/pack/artifacts
         cd artifactcollector
         go generate
-        go install .
+        go build .
         artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
