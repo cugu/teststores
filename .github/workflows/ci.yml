@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  standard:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -18,13 +18,50 @@ jobs:
     - run: |
         git clone https://github.com/forensicanalysis/artifactcollector --branch=v0.13.1
         cd artifactcollector
-        go install .
-        artifactcollector.exe
+        go generate
+        go build .
+        ./artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
       shell: bash
     - name: Upload
       uses: actions/upload-artifact@master
       with:
-        name: testdata
+        name: artifactcollector.exe standard
+        path: artifactcollector/artifactcollector.exe
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: testdata standard
+        path: artifactcollector/testdata
+
+  usb:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup go 1.13
+      uses: actions/setup-go@v1
+      with: {go-version: '1.13'}
+    - name: Set system path
+      run: echo "##[add-path]$(go env GOPATH)/bin"
+    - run: |
+        git clone https://github.com/forensicanalysis/artifactcollector --branch=v0.13.1
+        mv 1/ac.yaml artifactcollector/pack/ac.yaml
+        mv 1/artifacts/*.yaml artifactcollector/pack/artifacts
+        cd artifactcollector
+        go generate
+        go build .
+        ./artifactcollector.exe
+        mkdir testdata
+        mv *.forensicstore.zip testdata
+      shell: bash
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: artifactcollector.exe usb
+        path: artifactcollector/artifactcollector.exe
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: testdata usb
         path: artifactcollector/testdata
