@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: artifactcollector.exe standard
-        path: artifactcollector.exe
+        path: artifactcollector/artifactcollector.exe
     - name: Upload
       uses: actions/upload-artifact@master
       with:
@@ -59,7 +59,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: artifactcollector.exe usb
-        path: artifactcollector.exe
+        path: artifactcollector/artifactcollector.exe
     - name: Upload
       uses: actions/upload-artifact@master
       with:
