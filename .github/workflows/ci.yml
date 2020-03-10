@@ -20,7 +20,7 @@ jobs:
         cd artifactcollector
         go generate
         go build .
-        artifactcollector.exe
+        ./artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
       shell: bash
@@ -51,7 +51,7 @@ jobs:
         cd artifactcollector
         go generate
         go build .
-        artifactcollector.exe
+        ./artifactcollector.exe
         mkdir testdata
         mv *.forensicstore.zip testdata
       shell: bash
