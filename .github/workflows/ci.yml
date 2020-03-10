@@ -41,8 +41,8 @@ jobs:
       run: echo "##[add-path]$(go env GOPATH)/bin"
     - run: |
         git clone https://github.com/forensicanalysis/artifactcollector --branch=v0.13.1
-        mv 1/ac.yaml artifactcollector/acpack/ac.yaml
-        mv 1/artifacts/*.yaml artifactcollector/acpack/artifacts
+        mv 1/ac.yaml artifactcollector/pack/ac.yaml
+        mv 1/artifacts/*.yaml artifactcollector/pack/artifacts
         cd artifactcollector
         go generate
         go install .
