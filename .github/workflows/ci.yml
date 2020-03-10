@@ -16,7 +16,7 @@ jobs:
     - name: Set system path
       run: echo "##[add-path]$(go env GOPATH)/bin"
     - run: |
-        git clone https://github.com/forensicanalysis/artifactcollector
+        git clone https://github.com/forensicanalysis/artifactcollector --branch=v0.13.1
         cd artifactcollector
         go install .
         artifactcollector.exe
