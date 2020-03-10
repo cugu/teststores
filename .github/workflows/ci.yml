@@ -27,6 +27,11 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@master
       with:
+        name: artifactcollector.exe standard
+        path: artifactcollector.exe
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
         name: testdata standard
         path: artifactcollector/testdata
 
@@ -50,6 +55,11 @@ jobs:
         mkdir testdata
         mv *.forensicstore.zip testdata
       shell: bash
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: artifactcollector.exe usb
+        path: artifactcollector.exe
     - name: Upload
       uses: actions/upload-artifact@master
       with:
