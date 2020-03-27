@@ -1,0 +1,1 @@
+artifacts: ["WindowsFileAssociation", "WindowsFileAssociation2"]  # artifact definitions to collect, "*" to collect all artifacts

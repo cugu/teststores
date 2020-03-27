@@ -65,3 +65,34 @@ jobs:
       with:
         name: testdata usb
         path: artifactcollector/testdata
+
+  keytest:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup go 1.13
+      uses: actions/setup-go@v1
+      with: {go-version: '1.13'}
+    - name: Set system path
+      run: echo "##[add-path]$(go env GOPATH)/bin"
+    - run: |
+        git clone https://github.com/forensicanalysis/artifactcollector --branch=v0.13.1
+        mv 2/ac.yaml artifactcollector/pack/ac.yaml
+        mv 2/artifacts/*.yaml artifactcollector/pack/artifacts
+        cd artifactcollector
+        go generate
+        go build .
+        ./artifactcollector.exe
+        mkdir testdata
+        mv *.forensicstore.zip testdata
+      shell: bash
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: artifactcollector.exe keytest
+        path: artifactcollector/artifactcollector.exe
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: testdata keytest
+        path: artifactcollector/testdata

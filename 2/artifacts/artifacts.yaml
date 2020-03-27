@@ -1,0 +1,19 @@
+name: WindowsFileAssociation
+doc: User file association preferences
+sources:
+  - type: REGISTRY_VALUE
+    attributes:
+      key_value_pairs:
+        - {key: 'HKEY_CLASSES_ROOT\*\shell\open\command', value: ''}
+supported_os: [Windows]
+urls: ['https://attack.mitre.org/techniques/T1042/']
+---
+name: WindowsFileAssociation2
+doc: User file association preferences
+sources:
+  - type: REGISTRY_KEY
+    attributes:
+      keys:
+        - 'HKEY_CLASSES_ROOT\*\shell\open\command'
+supported_os: [Windows]
+urls: ['https://attack.mitre.org/techniques/T1042/'] 
